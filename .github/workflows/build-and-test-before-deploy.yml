@@ -2,9 +2,10 @@ name: Build, test and deploy eshop
 
 on:
   workflow_dispatch:
-  push:
+  pull_request:
     branches:
       - main
+    types: [closed]
 
 
 jobs:
@@ -21,7 +22,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 10
-            
+
       - name: Cache node modules
         uses: actions/cache@v3.0.11
         with:
@@ -47,7 +48,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 10
-            
+
       - name: Cache node modules
         uses: actions/cache@v3.0.11
         with:
@@ -84,7 +85,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 10
-            
+
       - name: Cache node modules
         uses: actions/cache@v3.0.11
         with:
