@@ -87,7 +87,7 @@
 - name: Delete previous instances
   hosts: localhost
   tasks:
-    - name: Collect info about previous instances
+    - name: Remove previous instances
       amazon.aws.ec2_instance:
         region: us-east-1
         access_key: "{{ access_key }}"
