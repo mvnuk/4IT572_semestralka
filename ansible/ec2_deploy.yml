@@ -1,10 +1,9 @@
 - name: Deploy to EC2
   hosts: localhost
   connection: local
-
   tasks:
     - name: Launch EC2 Instance
-      ec2:
+      amazon.aws.ec2_instance:
         instance_type: t2.micro
         name: SemestralniPrace
         image: ami-0b0dcb5067f052a63
