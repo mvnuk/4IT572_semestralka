@@ -3,6 +3,8 @@ name: Build and test eshop
 on:
   workflow_dispatch:
   push:
+    branches:
+      - '!master' #master má vlastní workflow, které i nasazuje
 
 jobs:
   Install:
