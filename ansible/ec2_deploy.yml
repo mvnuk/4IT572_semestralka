@@ -11,15 +11,15 @@
         region: us-east-1
         key_name: test
         security_group: eshop
-        vpc_subnet_id: subnet-01dadd366b847abee
+        vpc_subnet_id: subnet-057db35b078d09269
         count: 1
         network:
           assign_public_ip: yes
         wait: yes
         state: "running"
-        aws_access_key: "{{ access_key }}"
-        aws_secret_key: "{{ secret_key }}"
-        security_token: "{{ session_token }}"
+        access_key: "{{ access_key }}"
+        secret_key: "{{ secret_key }}"
+        session_token: "{{ session_token }}"
       register: ec2
 
 
