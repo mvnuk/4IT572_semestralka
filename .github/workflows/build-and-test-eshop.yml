@@ -115,6 +115,6 @@ jobs:
           ANSIBLE_HOST_KEY_CHECKING: False
         run: |
           echo "${{ secrets.VAULT_PASSWORD }}" > .ansible_vault_password
-          echo "${{ secrets.EC2_PK }}" > .ec2_ssh_key.pem
-          chmod 600 .ec2_ssh_key.pem
-          ansible-playbook ansible/ec2_deploy.yml --vault-password-file .ansible_vault_password --key-file .ec2_ssh_key.pem --user ec2-user
+          echo "${{ secrets.EC2_PK }}" > test.pem
+          chmod 400 .ec2_ssh_key.pem
+          ansible-playbook ansible/ec2_deploy.yml --vault-password-file .ansible_vault_password --key-file test.pem --user ec2-user
