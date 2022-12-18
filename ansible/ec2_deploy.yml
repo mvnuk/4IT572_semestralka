@@ -57,7 +57,7 @@
       become: yes
 
     - name: Start docker on startup
-      shell: systemctl enable docker
+      shell: systemctl enable docker --now
       become: yes
 
     - name: Set rights to docker
@@ -86,9 +86,9 @@
     - name: Collect info about previous instances
       amazon.aws.ec2_instance:
         region: us-east-1
-        aws_access_key: "{{ access_key }}"
-        aws_secret_key: "{{ secret_key }}"
-        security_token: "{{ session_token }}"
+        access_key: "{{ access_key }}"
+        secret_key: "{{ secret_key }}"
+        session_token: "{{ session_token }}"
         filters:
           "tag:Name": "SemestralniPrace" #vyfiltrujeme instance s nazvem semestralni prace
           #tento nazev nastavujeme nahore
