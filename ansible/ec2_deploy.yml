@@ -77,11 +77,11 @@
         port:
           80
 
-- name: Delete previous instance
+- name: Delete previous instances
   hosts: localhost
   tasks:
     - name: Collect info about previous instances
-      amazon.aws.ec2_instances:
+      amazon.aws.ec2_instance:
         region: us-east-1
         aws_access_key: "{{ access_key }}"
         aws_secret_key: "{{ secret_key }}"
