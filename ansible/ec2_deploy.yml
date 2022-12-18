@@ -10,7 +10,7 @@
           id: ami-0b0dcb5067f052a63
         region: us-east-1
         key_name: test
-        group: eshop
+        security_group: eshop
         vpc_subnet_id: subnet-01dadd366b847abee
         count: 1
         network:
