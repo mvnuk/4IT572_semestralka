@@ -76,8 +76,9 @@
     - wait_for:
         port:
           80
+
 - name: Delete previous instance
-  host: localhost
+  hosts: localhost
   tasks:
     - name: Collect info about previous instances
       amazon.aws.ec2_instances:
