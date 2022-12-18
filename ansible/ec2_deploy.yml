@@ -6,6 +6,7 @@
     - name: Launch EC2 Instance
       ec2:
         instance_type: t2.micro
+        name: SemestralniPrace
         image: ami-0b0dcb5067f052a63
         region: us-east-1
         key_name: test
@@ -18,22 +19,25 @@
         aws_secret_key: "{{ secret_key }}"
         security_token: "{{ session_token }}"
       register: ec2
+
+
     - name: Add instance host to group
       add_host:
         hostname: "{{ item.public_ip }}"
         groupname: launched
       loop: "{{ ec2.instances }}"
+
+
     - name: Wait for SSH connection
       delegate_to: "{{ item.public_dns_name }}"
       wait_for_connection:
-        delay: 30
+        delay: 150
         timeout: 300
       loop: "{{ ec2.instances }}"
 
 - name: Configure EC2
   hosts: launched
   connection: ssh
-
   tasks:
     - name: Install GIT and Docker
       yum:
@@ -73,3 +77,16 @@
     - wait_for:
         port:
           80
+- name: Delete previous instance
+  host: localhost
+  tasks:
+    - name: Collect info about previous instances
+      region: us-east-1
+      aws_access_key: "{{ access_key }}"
+      aws_secret_key: "{{ secret_key }}"
+      security_token: "{{ session_token }}"
+      filters:
+        "tag:Name": "SemestralniPrace" #vyfiltrujeme instance s nazvem semestralni prace
+        #tento nazev nastavujeme nahore
+      exact_count: 2
+      wait: yes

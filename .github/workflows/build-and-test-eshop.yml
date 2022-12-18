@@ -93,28 +93,28 @@ jobs:
           npm rebuild node-sass --force
           npm run test -- --colors
 
-#  Deploy:
-#    runs-on: ubuntu-latest
-#    needs: [Build, Test]
-#    if: ${{ github.ref == 'refs/heads/main' }} #zjistí jestli je větev main
-#
-#    steps:
-#      - name: Code checkout
-#        uses: actions/checkout@v2.5.0
-#        with:
-#          token: ${{ secrets.WORKFLOW_TOKEN }}
-#        #připojí se na SSH a spustí příkazy
-#      - name: Install python 3
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: '3.10'
-#
-#      - name: Install ansible via pip3
-#        run: pip3 install ansible boto boto3
-#
-#      - name: Run playbook
-#        run: |
-#          echo "${{ secrets.VAULT_PASSWORD }}" > .vault_password
-#          echo "${{ secrets.EC2_PK }}" > .ec2_ssh_key.pem
-#          chmod 400 .ec2_ssh_key.pem
-#          ansible-playbook ansible/ec2_deploy.yml --vault-password-file .ansible_vault_password --key-file .ec2_ssh_key.pem --user ec2-user
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: [Build, Test]
+    if: ${{ github.ref == 'refs/heads/main' }} #zjistí jestli je větev main
+
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v2.5.0
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+        #připojí se na SSH a spustí příkazy
+      - name: Install python 3
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install ansible via pip3
+        run: pip3 install ansible boto boto3
+
+      - name: Run playbook
+        run: |
+          echo "${{ secrets.VAULT_PASSWORD }}" > .vault_password
+          echo "${{ secrets.EC2_PK }}" > .ec2_ssh_key.pem
+          chmod 400 .ec2_ssh_key.pem
+          ansible-playbook ansible/ec2_deploy.yml --vault-password-file .ansible_vault_password --key-file .ec2_ssh_key.pem --user ec2-user
