@@ -80,12 +80,13 @@
   host: localhost
   tasks:
     - name: Collect info about previous instances
-      region: us-east-1
-      aws_access_key: "{{ access_key }}"
-      aws_secret_key: "{{ secret_key }}"
-      security_token: "{{ session_token }}"
-      filters:
-        "tag:Name": "SemestralniPrace" #vyfiltrujeme instance s nazvem semestralni prace
-        #tento nazev nastavujeme nahore
-      exact_count: 2
-      wait: yes
+      amazon.aws.ec2_instances:
+        region: us-east-1
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
+        security_token: "{{ session_token }}"
+        filters:
+          "tag:Name": "SemestralniPrace" #vyfiltrujeme instance s nazvem semestralni prace
+          #tento nazev nastavujeme nahore
+        exact_count: 2
+        wait: yes
