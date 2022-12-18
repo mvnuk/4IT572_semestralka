@@ -96,5 +96,5 @@
         filters:
           "tag:Name": "SemestralniPrace" #vyfiltrujeme instance s nazvem semestralni prace
           #tento nazev nastavujeme nahore
-        exact_count: 2
+        exact_count: 1
         wait: yes
