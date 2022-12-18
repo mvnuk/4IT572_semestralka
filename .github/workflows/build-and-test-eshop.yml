@@ -114,7 +114,7 @@ jobs:
 
       - name: Run playbook
         env:
-          ANSIBLE_HOST_KEY_CHECKING: false
+          ANSIBLE_HOST_KEY_CHECKING: False
         run: |
           echo "${{ secrets.VAULT_PASSWORD }}" > .ansible_vault_password
           echo "${{ secrets.EC2_PK }}" > .ec2_ssh_key.pem
