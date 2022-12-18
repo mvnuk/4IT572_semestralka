@@ -1,6 +1,10 @@
 - name: Deploy to EC2
   hosts: localhost
   connection: local
+  collections:
+    - amazon.aws
+  vars_files:
+    - ./group_vars/all/aws.yml
   tasks:
     - name: Launch EC2 Instance
       amazon.aws.ec2_instance:
